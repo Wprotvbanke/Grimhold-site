@@ -1,0 +1,22 @@
+{
+  "opensAt": "letter",
+  "chapters": ["00-preface.md", "01-letter.md"],
+  "title": {
+    "ru": {
+      "title": "GRIMHOLD",
+      "subtitle": "Дневник разработки",
+      "lines": ["Письмо автора и записи о том, как растёт игра.", "Начат 4 октября 2026 года."],
+      "contents": "Содержание",
+      "chapter": "Запись",
+      "end": ["Здесь кончаются записанные страницы.", "Дальше листы пусты — дневник ещё пишется."]
+    },
+    "en": {
+      "title": "GRIMHOLD",
+      "subtitle": "Development Diary",
+      "lines": ["A letter from the author and notes on how the game grows.", "Begun on the 4th of October, 2026."],
+      "contents": "Contents",
+      "chapter": "Entry",
+      "end": ["Here the written pages end.", "The leaves beyond are blank — the diary is still being written."]
+    }
+  }
+}
