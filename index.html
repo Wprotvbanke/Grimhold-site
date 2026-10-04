@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Grimhold — что уже в игре</title>
+<meta name="description" content="Grimhold — браузерная MMORPG от первого лица. Что уже работает в игре: ролик, кадры механик, журнал обновлений." />
+<meta property="og:title" content="Grimhold — что уже в игре" />
+<meta property="og:description" content="Браузерная MMORPG от первого лица. Ролик, кадры механик и журнал обновлений." />
+<meta property="og:image" content="media/poster.webp" />
+<meta name="theme-color" content="#0e0c0a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230e0c0a%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%23c9a45c%22 font-family=%22Georgia%22>G</text></svg>" />
+<link rel="preload" href="fonts/CormorantSC-bold-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/EBGaramond-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="style.css" />
+<script>
+  // Язык — до первой отрисовки: выбранный раньше или английский для нерусского браузера.
+  (function () {
+    var lang = 'ru';
+    try { lang = localStorage.getItem('grimhold-site-lang') || (/^ru|^uk|^be|^kk/.test(navigator.language) ? 'ru' : 'en'); } catch (e) {}
+    document.documentElement.dataset.lang = lang;
+    document.documentElement.lang = lang;
+  })();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">GRIMHOLD</a>
+    <nav>
+      <a href="#film"><span lang="ru">Ролик</span><span lang="en">Video</span></a>
+      <a href="#now"><span lang="ru">Что в игре</span><span lang="en">In the game</span></a>
+      <a href="#log"><span lang="ru">Обновления</span><span lang="en">Updates</span></a>
+      <a href="#voice"><span lang="ru">Отзыв</span><span lang="en">Feedback</span></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Язык / Language">
+      <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <h1>Grimhold</h1>
+    <p class="lead">
+      <span lang="ru">Браузерная MMORPG от первого лица — в разработке и открыта для игры.</span>
+      <span lang="en">A first-person browser MMORPG — in development and open to play.</span>
+    </p>
+    <div class="chips">
+      <span class="chip"><span class="dot"></span><span lang="ru">Сервер в сети</span><span lang="en">Server online</span></span>
+      <span class="chip"><span lang="ru">Открытый тест</span><span lang="en">Open test</span></span>
+      <span class="chip"><span lang="ru">Обновлено 4 октября 2026</span><span lang="en">Updated October 4, 2026</span></span>
+    </div>
+    <div class="actions">
+      <a class="btn" href="https://grimhold-online.lumihub.dev" target="_blank" rel="noopener"><span lang="ru">Играть в браузере</span><span lang="en">Play in the browser</span></a>
+      <a class="btn ghost" href="#film"><span lang="ru">Смотреть ролик</span><span lang="en">Watch the video</span></a>
+    </div>
+    <p class="note">
+      <span lang="ru">Нужен браузер с WebGPU: свежий Chrome, Edge, Opera или Яндекс Браузер.</span>
+      <span lang="en">Needs a browser with WebGPU: a recent Chrome, Edge, Opera or Yandex Browser.</span>
+    </p>
+  </div>
+</div>
+
+<section id="film">
+  <div class="wrap">
+    <div class="head">
+      <h2><span lang="ru">Ролик из игры</span><span lang="en">Gameplay video</span></h2>
+      <p><span lang="ru">Снято в игре. Нажмите на главу — ролик перемотается к ней.</span><span lang="en">Captured in the game. Click a chapter to jump to it.</span></p>
+    </div>
+    <div class="film">
+      <video id="video" controls playsinline preload="none" poster="media/poster.webp">
+        <source src="media/grimhold.mp4" type="video/mp4" />
+      </video>
+      <ol class="chapters" id="chapters">
+        <li><button type="button" data-at="0"><time>0:00</time><span><span lang="ru">Город: ворота и улицы</span><span lang="en">Town: the gate and the streets</span></span></button></li>
+        <li><button type="button" data-at="6"><time>0:06</time><span><span lang="ru">Казна с каменным ангелом</span><span lang="en">The treasury and its stone angel</span></span></button></li>
+        <li><button type="button" data-at="10"><time>0:10</time><span><span lang="ru">Кладбище за стеной — ночь и дождь</span><span lang="en">Graveyard beyond the wall — night and rain</span></span></button></li>
+        <li><button type="button" data-at="16"><time>0:16</time><span><span lang="ru">Стены, собор и его зал</span><span lang="en">Walls, the cathedral and its hall</span></span></button></li>
+        <li><button type="button" data-at="25"><time>0:25</time><span><span lang="ru">Закат над лесом</span><span lang="en">Sunset over the forest</span></span></button></li>
+        <li><button type="button" data-at="34"><time>0:34</time><span><span lang="ru">Другой игрок в рясе, печать заклинания</span><span lang="en">Another player in a robe, a spell sigil</span></span></button></li>
+        <li><button type="button" data-at="46"><time>0:46</time><span><span lang="ru">Костёр в поле</span><span lang="en">A campfire in the field</span></span></button></li>
+        <li><button type="button" data-at="52"><time>0:52</time><span><span lang="ru">Рюкзак и книга знаний</span><span lang="en">Backpack and the Book of Knowledge</span></span></button></li>
+        <li><button type="button" data-at="58"><time>0:58</time><span><span lang="ru">Лучи солнца сквозь лес</span><span lang="en">Sun rays through the trees</span></span></button></li>
+        <li><button type="button" data-at="61"><time>1:01</time><span><span lang="ru">Бой в поле</span><span lang="en">A fight in the field</span></span></button></li>
+        <li><button type="button" data-at="64"><time>1:04</time><span><span lang="ru">Оружие в руках у кладбища</span><span lang="en">Weapons in hand by the graveyard</span></span></button></li>
+        <li><button type="button" data-at="70"><time>1:10</time><span><span lang="ru">Подземелье и скелет-рыцарь</span><span lang="en">The dungeon and a skeleton knight</span></span></button></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="now">
+  <div class="wrap">
+    <div class="head">
+      <h2><span lang="ru">Что уже в игре</span><span lang="en">What is in the game</span></h2>
+      <p><span lang="ru">Всё ниже работает на живом сервере.</span><span lang="en">Everything below runs on the live server.</span></p>
+    </div>
+    <div class="grid">
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/town.webp"><img src="shots/town.webp" alt="Улица города ночью, собор с горящими окнами" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Город и собор</span><span lang="en">Town and cathedral</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Стены с воротами, улицы с фонарями, таверна, казна с ангелом и готический собор с залом. Ночью в окнах свечи, колокола бьют по часам.</span><span lang="en">Walls and gates, lamp-lit streets, a tavern, the angel treasury and a gothic cathedral you can enter. Candles burn at night, bells strike the hour.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/graveyard.webp"><img src="shots/graveyard.webp" alt="Кладбище ночью под дождём" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Кладбище</span><span lang="en">Graveyard</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">За западной стеной. Подойдёшь — скелеты вылезают из земли; уйдёшь — закапываются обратно.</span><span lang="en">Beyond the west wall. Come close and skeletons crawl out of the ground; walk away and they bury themselves again.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/sunset.webp"><img src="shots/sunset.webp" alt="Закат над лесом, шпили собора вдали" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Лес, небо, погода</span><span lang="en">Forest, sky, weather</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Густой лес — подрост и великаны вперемешку. Объёмные облака, девять погод от ясного дня до грозы, день сменяет ночь.</span><span lang="en">A dense forest of saplings and giants. Volumetric clouds, nine kinds of weather from clear skies to storms, day turning to night.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/sea.webp"><img src="shots/sea.webp" alt="Персонаж на пляже у северного моря" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Море на севере</span><span lang="en">The northern sea</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Пляж с дюнами, волны до горизонта, прибой и чайки. По воде слышно каждый шаг; глубже пояса не зайти.</span><span lang="en">A beach with dunes, waves to the horizon, surf and gulls. Every step splashes; you can wade no deeper than your waist.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/night.webp"><img src="shots/night.webp" alt="Площадь ночью, фонари и ангел казны" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Ночь и огонь</span><span lang="en">Night and fire</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Фонари, факел в руке, костёр, который разводит любой игрок. Свет даёт видеть — и делает видимым тебя.</span><span lang="en">Street lamps, a torch in hand, a campfire anyone can build. Light lets you see — and makes you seen.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/dungeon.webp"><img src="shots/dungeon.webp" alt="Скелет-рыцарь в подземелье, топор в руке" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Подземелья</span><span lang="en">Dungeons</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Три этажа комнат, сундуки и их стража, хозяин глубины на дне. Пока он жив, порталы заперты. Пал внизу — надетое пропадает, рюкзак остаётся мешком.</span><span lang="en">Three floors of rooms, guarded chests and the master of the depths at the bottom. While he lives, the portals stay shut. Fall below and your gear is lost; your pack stays behind as a bag.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/fight.webp"><img src="shots/fight.webp" alt="Бой двух игроков в поле" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Бой и оружие</span><span lang="en">Combat and weapons</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Топор, посох, лук с натяжением. Мобы заходят с флангов и уходят из-под удара. Мирного игрока не ударить без зажатого Alt.</span><span lang="en">Axe, staff and a bow you draw and release. Monsters flank and dodge. A peaceful player can only be struck with Alt held.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/magic.webp"><img src="shots/magic.webp" alt="Игрок в рясе, печать заклинания на земле" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Магия свитками</span><span lang="en">Magic by scrolls</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Восемь клеток умений: что вставил, то и умеешь. Огненный шар, заморозка, цепная молния, столп света, медитация. С посохом магия втрое сильнее.</span><span lang="en">Eight skill slots: you know what you slot in. Fireball, frost, chain lightning, pillar of light, meditation. A staff makes magic three times stronger.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/lobby.webp"><img src="shots/lobby.webp" alt="Лагерь у костра: выбор персонажа" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Персонажи</span><span lang="en">Characters</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Дворф, человек, эльф — свои модели и походка. Все герои учётки сидят у костра, выбранный выходит к огню. Одежда, танец и отдых у огня.</span><span lang="en">Dwarf, human and elf with their own models and gait. All your characters sit by the campfire; the chosen one steps up. Clothing, dancing and resting by the fire.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/backpack.webp"><img src="shots/backpack.webp" alt="Рюкзак с куклой персонажа" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Рюкзак, казна, обмен</span><span lang="en">Backpack, vault, trade</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Рюкзак с куклой, панель на двадцать ячеек, казна переживает смерть. Обмен вещами со столом и подтверждением, отряд с общим опытом.</span><span lang="en">A backpack with a paper doll, twenty quick slots, a vault that survives death. Trading at a shared table, parties that share experience.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/book.webp"><img src="shots/book.webp" alt="Раскрытая книга знаний" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Книга знаний</span><span lang="en">Book of Knowledge</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Лежит в рюкзаке: вылетает на стол, раскрывается, страницы шуршат. Тринадцать глав о том, как устроен мир.</span><span lang="en">It lies in your backpack: it lands on the table, opens, its pages rustle. Thirteen chapters on how the world works.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/campfire.webp"><img src="shots/campfire.webp" alt="Костёр ночью, игрок сидит у огня" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Звук и музыка</span><span lang="en">Sound and music</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Шаги по камню, траве и воде, треск костра, эхо собора. Своя музыка у города, поля и боя; вороны взлетают с криком.</span><span lang="en">Footsteps on stone, grass and water, a crackling fire, the cathedral's echo. Music of its own for town, field and battle; crows take off crying.</span></p>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="strip" aria-label="Ещё кадры">
+      <button type="button" data-view="shots/portal.webp"><img src="shots/portal.webp" alt="Портал собора со статуями" loading="lazy" /></button>
+      <button type="button" data-view="shots/hall.webp"><img src="shots/hall.webp" alt="Зал собора" loading="lazy" /></button>
+      <button type="button" data-view="shots/bank.webp"><img src="shots/bank.webp" alt="Казна с ангелом" loading="lazy" /></button>
+      <button type="button" data-view="shots/cover.webp"><img src="shots/cover.webp" alt="Обложка книги знаний" loading="lazy" /></button>
+      <button type="button" data-view="shots/login.webp"><img src="shots/login.webp" alt="Экран входа" loading="lazy" /></button>
+      <button type="button" data-view="shots/death.webp"><img src="shots/death.webp" alt="Экран смерти" loading="lazy" /></button>
+    </div>
+  </div>
+</section>
+
+<section id="log">
+  <div class="wrap">
+    <div class="head">
+      <h2><span lang="ru">Последние обновления</span><span lang="en">Recent updates</span></h2>
+    </div>
+    <div class="log">
+      <article>
+        <time datetime="2026-10-04"><span lang="ru">4 октября</span><span lang="en">October 4</span></time>
+        <ul lang="ru">
+          <li>Отзывы прямо из игры и с этой страницы — кнопка «!»</li>
+          <li>Шаги по воде, прибой и чайки над морем</li>
+          <li>Лес втрое гуще и вдвое выше</li>
+          <li>Тени облаков по земле, мягче и мрачнее цвета</li>
+          <li>Вторая панель быстрого доступа на десять ячеек</li>
+          <li>Оружие со спины и питьё из фляги — жестами рук</li>
+        </ul>
+        <ul lang="en">
+          <li>Feedback straight from the game and from this page — the “!” button</li>
+          <li>Splashing footsteps, surf and gulls over the sea</li>
+          <li>The forest is three times denser and twice as tall</li>
+          <li>Cloud shadows on the ground, softer and grimmer colours</li>
+          <li>A second ten-slot quick bar</li>
+          <li>Drawing a weapon from the back and drinking from a flask — with hand gestures</li>
+        </ul>
+      </article>
+      <article>
+        <time datetime="2026-10-03"><span lang="ru">3 октября</span><span lang="en">October 3</span></time>
+        <ul lang="ru">
+          <li>Море на севере: пляж и волны до горизонта</li>
+          <li>Новый экран входа с роликом из игры</li>
+          <li>Музыка поля и боя, эхо в соборе и на улицах</li>
+          <li>Камни, кусты, коряги и крепость в редакторе мира</li>
+        </ul>
+        <ul lang="en">
+          <li>The northern sea: a beach and waves to the horizon</li>
+          <li>A new login screen with gameplay footage</li>
+          <li>Field and battle music, echo in the cathedral and streets</li>
+          <li>Rocks, bushes, driftwood and a fortress in the world editor</li>
+        </ul>
+      </article>
+      <article>
+        <time datetime="2026-10-02"><span lang="ru">2 октября</span><span lang="en">October 2</span></time>
+        <ul lang="ru">
+          <li>Собор с двором, садом и колоколами</li>
+          <li>Лагерь у костра вместо меню выбора</li>
+          <li>Горы на горизонте, ряса монаха</li>
+          <li>Игра рисует через WebGPU, мир — в своём потоке</li>
+        </ul>
+        <ul lang="en">
+          <li>The cathedral with its yard, garden and bells</li>
+          <li>A campfire camp instead of a character menu</li>
+          <li>Mountains on the horizon, the monk's robe</li>
+          <li>The game renders with WebGPU, the world runs in its own thread</li>
+        </ul>
+      </article>
+      <article>
+        <time datetime="2026-09-28"><span lang="ru">27–28 сентября</span><span lang="en">September 27–28</span></time>
+        <ul lang="ru">
+          <li>Книга знаний в рюкзаке</li>
+          <li>Вороны, которых спугивают шаги</li>
+          <li>Мобы бьют в очередь и заходят с флангов</li>
+          <li>Флаги PvP с Alt, столп света, костёр, танец</li>
+        </ul>
+        <ul lang="en">
+          <li>The Book of Knowledge in the backpack</li>
+          <li>Crows scared off by footsteps</li>
+          <li>Monsters take turns to strike and flank</li>
+          <li>PvP flags with Alt, the pillar of light, campfires, dancing</li>
+        </ul>
+      </article>
+      <article>
+        <time datetime="2026-09-26"><span lang="ru">25–26 сентября</span><span lang="en">September 25–26</span></time>
+        <ul lang="ru">
+          <li>Новое небо и девять погод с грозами</li>
+          <li>Кладбище со стражами, лес и мягкая трава</li>
+          <li>Луна по карте NASA, цепная молния</li>
+        </ul>
+        <ul lang="en">
+          <li>A new sky and nine kinds of weather with storms</li>
+          <li>The graveyard and its guardians, the forest and soft grass</li>
+          <li>A moon from NASA maps, chain lightning</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="voice" class="voice">
+  <div class="wrap">
+    <h2><span lang="ru">Ваше слово</span><span lang="en">Your word</span></h2>
+    <p>
+      <span lang="ru">Нашли ошибку или знаете, чего не хватает игре? Напишите — сообщение придёт прямо разработчику, в ту же очередь, что и отзывы из игры.</span>
+      <span lang="en">Found a bug or know what the game is missing? Write to us — the message goes straight to the developer, into the same queue as feedback from inside the game.</span>
+    </p>
+    <button class="btn" type="button" data-open-feedback><span lang="ru">Предложить или сообщить об ошибке</span><span lang="en">Suggest or report a bug</span></button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Grimhold · <span lang="ru">в разработке</span><span lang="en">in development</span> · 2026</span>
+    <span><span lang="ru">Шрифты EB Garamond и Cormorant SC — SIL OFL</span><span lang="en">Fonts EB Garamond and Cormorant SC — SIL OFL</span></span>
+  </div>
+</footer>
+
+<button class="fab" type="button" data-open-feedback aria-label="Оставить отзыв / Leave feedback" title="Оставить отзыв / Leave feedback">!</button>
+
+<dialog id="feedback" aria-labelledby="feedbackTitle">
+  <form method="dialog" id="feedbackForm">
+    <h3 id="feedbackTitle"><span lang="ru">Ошибка или идея?</span><span lang="en">A bug or an idea?</span></h3>
+    <p class="sub"><span lang="ru">Сообщение придёт разработчику.</span><span lang="en">The message goes to the developer.</span></p>
+    <div class="kinds" role="group">
+      <button type="button" data-kind="idea" aria-pressed="true"><span lang="ru">Пожелание</span><span lang="en">Idea</span></button>
+      <button type="button" data-kind="bug" aria-pressed="false"><span lang="ru">Ошибка</span><span lang="en">Bug</span></button>
+      <button type="button" data-kind="other" aria-pressed="false"><span lang="ru">Другое</span><span lang="en">Other</span></button>
+    </div>
+    <label class="sr" for="feedbackText" hidden>Текст</label>
+    <textarea id="feedbackText" maxlength="2000" required></textarea>
+    <div class="foot"><span id="feedbackStatus" aria-live="polite"></span><span id="feedbackCount">0 / 2000</span></div>
+    <div class="row">
+      <button class="btn" type="submit" id="feedbackSend"><span lang="ru">Отправить</span><span lang="en">Send</span></button>
+      <button class="btn ghost" type="button" id="feedbackClose"><span lang="ru">Закрыть</span><span lang="en">Close</span></button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="view" class="view">
+  <figure style="margin:0">
+    <img id="viewImage" alt="" />
+    <figcaption id="viewCaption"></figcaption>
+  </figure>
+</dialog>
+
+<script src="feedback.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
