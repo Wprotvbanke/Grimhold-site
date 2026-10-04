@@ -17,32 +17,6 @@
     button.addEventListener('click', function () { setLang(button.dataset.setLang); });
   });
 
-  // ---------- главы ролика ----------
-  var video = document.getElementById('video');
-  var chapters = Array.prototype.slice.call(document.querySelectorAll('#chapters button'));
-  chapters.forEach(function (button) {
-    button.addEventListener('click', function () {
-      var at = Number(button.dataset.at);
-      var go = function () {
-        video.currentTime = at;
-        video.play().catch(function () { /* без звука браузер может не пустить — кнопка «плей» под рукой */ });
-      };
-      if (video.readyState >= 1) go();
-      else {
-        video.preload = 'auto';
-        video.addEventListener('loadedmetadata', go, { once: true });
-        video.load();
-      }
-      video.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-  });
-  video.addEventListener('timeupdate', function () {
-    var now = video.currentTime;
-    var current = null;
-    chapters.forEach(function (button) { if (Number(button.dataset.at) <= now + 0.2) current = button; });
-    chapters.forEach(function (button) { button.classList.toggle('on', button === current); });
-  });
-
   // ---------- кадры крупно ----------
   var view = document.getElementById('view');
   var viewImage = document.getElementById('viewImage');

@@ -12,6 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230e0c0a%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%23c9a45c%22 font-family=%22Georgia%22>G</text></svg>" />
 <link rel="preload" href="fonts/CormorantSC-bold-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="fonts/EBGaramond-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="book/page-right.webp" as="image" />
 <link rel="stylesheet" href="style.css" />
 <script>
   // Язык — до первой отрисовки: выбранный раньше или английский для нерусского браузера.
@@ -70,26 +71,27 @@
   <div class="wrap">
     <div class="head">
       <h2><span lang="ru">Ролик из игры</span><span lang="en">Gameplay video</span></h2>
-      <p><span lang="ru">Снято в игре. Нажмите на главу — ролик перемотается к ней.</span><span lang="en">Captured in the game. Click a chapter to jump to it.</span></p>
+      <p><span lang="ru">Снято в игре. Рядом — дневник разработки: листайте.</span><span lang="en">Captured in the game. Beside it — the development diary: turn the pages.</span></p>
     </div>
     <div class="film">
       <video id="video" controls playsinline preload="none" poster="media/poster.webp">
         <source src="media/grimhold.mp4" type="video/mp4" />
       </video>
-      <ol class="chapters" id="chapters">
-        <li><button type="button" data-at="0"><time>0:00</time><span><span lang="ru">Город: ворота и улицы</span><span lang="en">Town: the gate and the streets</span></span></button></li>
-        <li><button type="button" data-at="6"><time>0:06</time><span><span lang="ru">Казна с каменным ангелом</span><span lang="en">The treasury and its stone angel</span></span></button></li>
-        <li><button type="button" data-at="10"><time>0:10</time><span><span lang="ru">Кладбище за стеной — ночь и дождь</span><span lang="en">Graveyard beyond the wall — night and rain</span></span></button></li>
-        <li><button type="button" data-at="16"><time>0:16</time><span><span lang="ru">Стены, собор и его зал</span><span lang="en">Walls, the cathedral and its hall</span></span></button></li>
-        <li><button type="button" data-at="25"><time>0:25</time><span><span lang="ru">Закат над лесом</span><span lang="en">Sunset over the forest</span></span></button></li>
-        <li><button type="button" data-at="34"><time>0:34</time><span><span lang="ru">Другой игрок в рясе, печать заклинания</span><span lang="en">Another player in a robe, a spell sigil</span></span></button></li>
-        <li><button type="button" data-at="46"><time>0:46</time><span><span lang="ru">Костёр в поле</span><span lang="en">A campfire in the field</span></span></button></li>
-        <li><button type="button" data-at="52"><time>0:52</time><span><span lang="ru">Рюкзак и книга знаний</span><span lang="en">Backpack and the Book of Knowledge</span></span></button></li>
-        <li><button type="button" data-at="58"><time>0:58</time><span><span lang="ru">Лучи солнца сквозь лес</span><span lang="en">Sun rays through the trees</span></span></button></li>
-        <li><button type="button" data-at="61"><time>1:01</time><span><span lang="ru">Бой в поле</span><span lang="en">A fight in the field</span></span></button></li>
-        <li><button type="button" data-at="64"><time>1:04</time><span><span lang="ru">Оружие в руках у кладбища</span><span lang="en">Weapons in hand by the graveyard</span></span></button></li>
-        <li><button type="button" data-at="70"><time>1:10</time><span><span lang="ru">Подземелье и скелет-рыцарь</span><span lang="en">The dungeon and a skeleton knight</span></span></button></li>
-      </ol>
+      <div class="diary">
+        <div class="book" id="book" role="region" aria-roledescription="book" aria-label="Дневник разработки / Development diary">
+          <div class="spread" id="spread">
+            <div class="page left" id="pageLeft" role="button" tabindex="0" aria-label="Предыдущая страница / Previous page"></div>
+            <div class="page right" id="pageRight" role="button" tabindex="0" aria-label="Следующая страница / Next page"></div>
+            <div class="turn" id="turn" aria-hidden="true"><div class="face front"></div><div class="face back"></div></div>
+            <div class="gutter" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="book-nav">
+          <button type="button" id="bookPrev" aria-label="Назад / Back">‹</button>
+          <span id="bookWhere"></span>
+          <button type="button" id="bookNext" aria-label="Дальше / Next">›</button>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -320,6 +322,83 @@
 
 <button class="fab" type="button" data-open-feedback aria-label="Оставить отзыв / Leave feedback" title="Оставить отзыв / Leave feedback">!</button>
 
+<template id="diary-ru">
+  <article class="pg title">
+    <p class="kicker">Grimhold</p>
+    <h3>Дневник разработки</h3>
+    <svg class="orn" viewBox="0 0 120 14" aria-hidden="true"><path d="M2 7h44M74 7h44" stroke="currentColor" stroke-width="1"/><path d="M60 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="50" cy="7" r="1.6" fill="currentColor"/><circle cx="70" cy="7" r="1.6" fill="currentColor"/></svg>
+    <p class="sub">Письмо автора и записи о том, как растёт игра</p>
+    <p class="date">Начат 4 октября 2026</p>
+  </article>
+  <article class="pg">
+    <h4>Письмо автора</h4>
+    <p class="drop">Мне всегда нравились мрачные и тёмные истории о Средневековье, ролевые песочницы, мрачное фэнтези и скелеты)) Может быть, это наивно, но всё это до сих пор вызывает у меня восторг, как у маленького ребёнка. Именно поэтому и появился этот проект.</p>
+  </article>
+  <article class="pg">
+    <p>Я не разработчик и не геймдизайнер — просто человек, который хочет сделать что-то в духе тёмного фэнтези. Не знаю, получится ли у меня собрать хотя бы немного интересный геймплей, но я пробую, пока есть возможность и желание.</p>
+    <p>Спасибо зрителям, которые подтолкнули меня к этому проекту и помогают — идеями, материально и просто своим присутствием.</p>
+  </article>
+  <article class="pg">
+    <p>Задумывалась игра как MMORPG с элементами экстракшена: прокачка в открытом мире, а в подземельях — вылазки за редкой добычей и расходниками. Но сейчас я понимаю, что в самой этой идее ещё нет настоящего геймплея.</p>
+    <p>Поэтому пока я делаю механики, экспериментирую и добавляю атмосферу.</p>
+  </article>
+  <article class="pg">
+    <p>Наверное, это наивно, но я надеюсь нащупать геймплей интуитивно. Получится или нет — не знаю. Зато точно знаю, что мне всё это нравится: я словно житель мрачного Средневековья, которое сам выдумал, и пытаюсь пройти его путь.</p>
+  </article>
+  <article class="pg">
+    <p>Это скорее творческий проект. В команде — художник, который делает модели и анимации, и я, автор. И я получаю огромное удовольствие, ведя этот проект.</p>
+    <p>Сейчас цель — отполировать механики, которые уже есть, и попробовать сложить из них основной геймплей, который будет увлекать.</p>
+  </article>
+  <article class="pg">
+    <p>В планах — лор мира, много атмосферы и надежда найти по-настоящему живой геймплей.</p>
+    <p class="sign">— Автор Grimhold</p>
+    <p class="date">4 октября 2026</p>
+  </article>
+  <article class="pg">
+    <h4>Записи</h4>
+    <svg class="orn" viewBox="0 0 120 14" aria-hidden="true"><path d="M2 7h44M74 7h44" stroke="currentColor" stroke-width="1"/><path d="M60 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="50" cy="7" r="1.6" fill="currentColor"/><circle cx="70" cy="7" r="1.6" fill="currentColor"/></svg>
+    <p class="note">Дальше здесь будут записи дневника: что изменилось в игре и что задумано.</p>
+  </article>
+</template>
+<template id="diary-en">
+  <article class="pg title">
+    <p class="kicker">Grimhold</p>
+    <h3>Development diary</h3>
+    <svg class="orn" viewBox="0 0 120 14" aria-hidden="true"><path d="M2 7h44M74 7h44" stroke="currentColor" stroke-width="1"/><path d="M60 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="50" cy="7" r="1.6" fill="currentColor"/><circle cx="70" cy="7" r="1.6" fill="currentColor"/></svg>
+    <p class="sub">A letter from the author and notes on how the game grows</p>
+    <p class="date">Begun October 4, 2026</p>
+  </article>
+  <article class="pg">
+    <h4>A letter from the author</h4>
+    <p class="drop">I have always loved grim, dark stories of the Middle Ages, sandbox role-playing games, dark fantasy — and skeletons)) Maybe it is naive, but all of this still fills me with the delight of a small child. That is exactly why this project exists.</p>
+  </article>
+  <article class="pg">
+    <p>I am not a developer or a game designer — just someone who wants to make something in the spirit of dark fantasy. I don't know whether I will manage to build even slightly interesting gameplay, but I keep trying while I have the chance and the will.</p>
+    <p>Thank you to the viewers who pushed me into this project and keep helping — with ideas, with support and simply by being here.</p>
+  </article>
+  <article class="pg">
+    <p>The game was first conceived as an MMORPG with extraction elements: progression in an open world, and dungeon runs for rare loot and supplies. But now I see that the idea alone does not hold real gameplay yet.</p>
+    <p>So for now I am building mechanics, experimenting and adding atmosphere.</p>
+  </article>
+  <article class="pg">
+    <p>Perhaps it is naive, but I hope to find the gameplay by feel. Whether it works out, I don't know. What I do know is that I love all of it: I feel like a dweller of the grim Middle Ages I made up, trying to walk its path.</p>
+  </article>
+  <article class="pg">
+    <p>It is more of a creative project. The team is an artist who makes the models and animations — and me, the author. And I take enormous joy in leading it.</p>
+    <p>The goal now is to polish the mechanics already in place and try to shape them into core gameplay that truly draws you in.</p>
+  </article>
+  <article class="pg">
+    <p>Ahead: the lore of the world, plenty of atmosphere, and the hope of finding gameplay that truly lives.</p>
+    <p class="sign">— the author of Grimhold</p>
+    <p class="date">October 4, 2026</p>
+  </article>
+  <article class="pg">
+    <h4>Entries</h4>
+    <svg class="orn" viewBox="0 0 120 14" aria-hidden="true"><path d="M2 7h44M74 7h44" stroke="currentColor" stroke-width="1"/><path d="M60 1l6 6-6 6-6-6z" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="50" cy="7" r="1.6" fill="currentColor"/><circle cx="70" cy="7" r="1.6" fill="currentColor"/></svg>
+    <p class="note">Diary entries will follow here: what changed in the game and what is planned.</p>
+  </article>
+</template>
+
 <dialog id="feedback" aria-labelledby="feedbackTitle">
   <form method="dialog" id="feedbackForm">
     <h3 id="feedbackTitle"><span lang="ru">Ошибка или идея?</span><span lang="en">A bug or an idea?</span></h3>
@@ -348,5 +427,6 @@
 
 <script src="feedback.js"></script>
 <script src="site.js"></script>
+<script src="book.js"></script>
 </body>
 </html>

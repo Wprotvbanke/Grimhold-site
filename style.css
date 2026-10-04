@@ -6,6 +6,8 @@
 @font-face { font-family: 'EB Garamond'; font-style: normal; font-display: swap; src: url(fonts/EBGaramond-cyrillic.woff2) format('woff2'); unicode-range: U+0400-045F, U+2116; }
 @font-face { font-family: 'EB Garamond'; font-style: italic; font-display: swap; src: url(fonts/EBGaramond-italic-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
 @font-face { font-family: 'EB Garamond'; font-style: italic; font-display: swap; src: url(fonts/EBGaramond-italic-cyrillic.woff2) format('woff2'); unicode-range: U+0400-045F, U+2116; }
+@font-face { font-family: 'Marck Script'; font-display: swap; src: url(fonts/MarckScript-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family: 'Marck Script'; font-display: swap; src: url(fonts/MarckScript-cyrillic.woff2) format('woff2'); unicode-range: U+0400-045F, U+2116; }
 
 :root {
   --bg: #0e0c0a;
@@ -114,18 +116,82 @@ section + section { border-top: 1px solid var(--line); }
 h2 { margin: 0; font: 700 clamp(28px, 4vw, 40px)/1.1 var(--display); letter-spacing: 0.06em; color: var(--gold-hi); text-wrap: balance; }
 .head p { margin: 0; color: var(--dim); font-size: 17px; }
 
-/* ---------- ролик ---------- */
-.film { display: grid; grid-template-columns: minmax(0, 2.1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+/* ---------- ролик и дневник ---------- */
+#film .wrap { max-width: 1380px; }
+.film { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
 .film video { width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line-hi); border-radius: 4px; }
-.chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.chapters button {
-  width: 100%; display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: baseline;
-  padding: 7px 10px; border: 0; border-radius: 3px; background: none; text-align: left; cursor: pointer;
-  font-size: 17px; line-height: 1.3;
+
+/*
+ * Книга — как книга знаний в игре: кожаный переплёт, пергамент с обожжёнными
+ * краями, красная буквица, номер внизу, подпись почерком. Всё внутри
+ * страницы меряется от её ширины (cqw): разметка одинакова на любом экране,
+ * и страница, влезшая однажды, влезает всегда.
+ */
+.diary { display: grid; gap: 12px; }
+.book {
+  padding: 2.4% 2.8%;
+  background: #2a1810 url(book/leather.webp) center / cover;
+  border-radius: 6px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.75), inset 0 0 0 1px rgba(201, 164, 92, 0.28), inset 0 0 40px rgba(0, 0, 0, 0.6);
 }
-.chapters button:hover { background: var(--panel); }
-.chapters button.on { background: var(--panel); box-shadow: inset 3px 0 0 var(--gold); }
-.chapters time { font: 600 15px/1.3 var(--text); color: var(--gold); font-variant-numeric: tabular-nums; }
+.spread { position: relative; display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 3 / 2; perspective: 2400px; }
+.page, .turn .face {
+  position: relative; display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0;
+  container-type: inline-size; overflow: hidden; color: #2c1b0f; text-align: left;
+  background: url(book/page-right.webp) center / 100% 100% no-repeat;
+}
+.page { cursor: pointer; }
+.page.left, .turn.fwd .back, .turn.bwd .front { background-image: url(book/page-left.webp); }
+.page.blank { cursor: default; }
+.page:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: -4px; }
+.gutter {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 9%; transform: translateX(-50%); pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(60, 30, 8, 0.28) 38%, rgba(25, 12, 2, 0.55) 50%, rgba(60, 30, 8, 0.28) 62%, transparent);
+}
+.turn { position: absolute; top: 0; bottom: 0; left: 50%; width: 50%; transform-style: preserve-3d; transform-origin: left center; visibility: hidden; z-index: 3; pointer-events: none; }
+.turn .face { position: absolute; inset: 0; backface-visibility: hidden; }
+.turn .face::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, 0.22), transparent 30%); opacity: 0; transition: opacity 0.35s; }
+.turn .back { transform: rotateY(180deg); }
+.turn.go { visibility: visible; }
+.turn.go .face::after { opacity: 1; }
+.turn.fwd.go { animation: book-forward 0.7s cubic-bezier(0.45, 0.05, 0.35, 1) forwards; }
+.turn.bwd { left: 0; transform-origin: right center; }
+.turn.bwd.go { animation: book-backward 0.7s cubic-bezier(0.45, 0.05, 0.35, 1) forwards; }
+.turn.unturn { transform: rotateY(-180deg); }
+.turn.unturn.go { animation: book-return 0.7s cubic-bezier(0.45, 0.05, 0.35, 1) forwards; }
+.turn.unturn .back { visibility: hidden; }
+@keyframes book-forward { from { transform: rotateY(0); } to { transform: rotateY(-180deg); } }
+@keyframes book-backward { from { transform: rotateY(0); } to { transform: rotateY(180deg); } }
+@keyframes book-return { from { transform: rotateY(-180deg); } to { transform: rotateY(0); } }
+
+.pg {
+  position: absolute; inset: 0; padding: 11cqw 11cqw 13cqw;
+  font: 5.2cqw/1.45 var(--text); color: #2c1b0f;
+  text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+}
+.pg p { margin: 0 0 0.55em; }
+.pg h4 { margin: 2cqw 0 5cqw; font: 700 7.6cqw/1.1 var(--display); color: #7a1c10; text-align: center; letter-spacing: 0.03em; }
+.pg .drop::first-letter { float: left; margin: 1.2cqw 2.2cqw 0 0; font: 700 18cqw/0.78 var(--display); color: #8f2316; }
+.pg .sign { margin-top: 5cqw; font: 8cqw/1.1 'Marck Script', var(--text); color: #3d2410; text-align: right; }
+.pg .date { font-style: italic; font-size: 4.4cqw; color: #5a3a22; text-align: right; }
+.pg .note { font-style: italic; text-align: center; color: #4a2e18; }
+.pg .orn { display: block; width: 42cqw; height: auto; margin: 2cqw auto 5cqw; color: #8f2316; }
+.pg .num { position: absolute; left: 0; right: 0; bottom: 6cqw; text-align: center; font: 700 4.4cqw/1 var(--display); color: #6b4a2a; }
+.pg.title { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.pg.title .kicker { margin: 0 0 3cqw; font: 700 5cqw/1 var(--display); letter-spacing: 0.32em; padding-left: 0.32em; color: #6b4a2a; }
+.pg.title h3 { margin: 0; font: 700 10cqw/1.05 var(--display); color: #5c1a0e; text-wrap: balance; }
+.pg.title .orn { margin: 5cqw auto; }
+.pg.title .sub { margin: 0 0 4cqw; font-style: italic; font-size: 5cqw; text-align: center; color: #3d2410; text-wrap: balance; }
+.pg.title .date { text-align: center; }
+
+.book-nav { display: flex; align-items: center; justify-content: center; gap: 14px; color: var(--dim); font-size: 15px; font-variant-numeric: tabular-nums; }
+.book-nav button {
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+  border: 1px solid #8a6a3a; color: #e5c47e; font: 700 22px/1 Georgia, serif;
+  background: radial-gradient(circle at 35% 30%, #3d2d1f 0%, #1c150f 62%, #0d0a07 100%);
+}
+.book-nav button:disabled { opacity: 0.35; cursor: default; }
+.book-nav button:not(:disabled):hover { color: #f6dea0; }
 
 /* ---------- что в игре ---------- */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 22px; }
@@ -199,8 +265,16 @@ dialog.view figcaption { padding: 10px 14px; font-size: 16px; color: var(--dim);
 footer { border-top: 1px solid var(--line); padding-block: 28px 90px; color: var(--dim); font-size: 15px; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .film { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .spread { grid-template-columns: 1fr; aspect-ratio: 3 / 4; }
+  .page.left { display: none; }
+  .gutter { left: 0; width: 7%; transform: none; background: linear-gradient(90deg, rgba(25, 12, 2, 0.5), transparent); }
+  .turn, .turn.bwd { left: 0; width: 100%; transform-origin: left center; }
+}
+@media (max-width: 900px) {
   .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .log article { grid-template-columns: 1fr; gap: 8px; }
   .top nav { display: none; }
@@ -208,5 +282,6 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .turn.go { animation: none !important; }
   .card .shot img { transition: none; }
 }
