@@ -10,7 +10,7 @@
  * открывается простым листом пергамента — из тех же файлов.
  */
 /** Поднять, когда пересобрана книга: иначе браузер возьмёт прежнюю из кеша. */
-const BUILD = '1004c';
+const BUILD = '1005b';
 
 const root = document.documentElement;
 const tome = document.getElementById('tome');

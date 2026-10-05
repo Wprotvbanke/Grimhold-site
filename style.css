@@ -103,14 +103,39 @@ button { font: inherit; color: inherit; }
   filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.8));
 }
 .hero .lead { margin: 14px auto 0; max-width: 34em; font-style: italic; font-size: clamp(18px, 2.4vw, 22px); color: #e2d6bc; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9); }
-.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 22px; }
-.chip {
-  display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border-radius: 999px;
-  border: 1px solid var(--line-hi); background: rgba(20, 17, 13, 0.75);
-  font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums;
+/*
+ * Состояние игры — строкой состояния, а не кнопками: без овалов и рамок,
+ * отрезки через тонкую черту, у живого — огонёк (05.10, владелец:
+ * «похожи на кнопку… сделать как индикаторы, как статус-бары»).
+ */
+.status {
+  list-style: none; margin: 22px auto 0; padding: 0; display: inline-flex; flex-wrap: wrap; justify-content: center;
+  background: linear-gradient(180deg, rgba(10, 8, 6, 0.0), rgba(10, 8, 6, 0.55));
+  border-bottom: 1px solid rgba(201, 164, 92, 0.35);
+  font: 600 13px/1.2 var(--text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim);
+  font-variant-numeric: tabular-nums;
 }
-.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--live); box-shadow: 0 0 8px var(--live); }
+.status li { display: inline-flex; align-items: center; gap: 9px; padding: 7px 18px; }
+.status li + li { box-shadow: inset 1px 0 0 rgba(201, 164, 92, 0.22); }
+.status .online { color: var(--ink); }
+.status .led { width: 7px; height: 7px; border-radius: 1px; background: var(--live); box-shadow: 0 0 6px var(--live), 0 0 14px color-mix(in srgb, var(--live) 50%, transparent); }
+.status .online .led { animation: led 2.4s ease-in-out infinite; }
+.status .stage .led { width: 14px; height: 4px; background: var(--gold); box-shadow: 0 0 6px color-mix(in srgb, var(--gold) 60%, transparent); }
+@keyframes led { 50% { opacity: 0.45; } }
 .hero .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+.hero .actions + .actions { margin-top: 12px; }
+/* Отзыв — видная кнопка под главными: тот же камень, свой знак «!». */
+.btn.talk { background: rgba(20, 17, 13, 0.78); border-color: var(--line-hi); color: var(--ink); font-size: 16px; padding-block: 8px; }
+.btn.talk:hover { background: rgba(48, 38, 24, 0.9); border-color: var(--gold); color: var(--gold-hi); }
+.btn.talk .bang {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: linear-gradient(180deg, #d9b56c, #a8843f); color: #1b140a; font: 700 15px/1 var(--display);
+}
+.diary-note .narrow { display: none; }
+@media (pointer: coarse) and (max-width: 900px) {
+  .diary-note .wide { display: none; }
+  .diary-note .narrow { display: inline; }
+}
 .hero .note { margin-top: 14px; font-size: 15px; color: var(--dim); }
 
 /* ---------- разделы ---------- */
@@ -258,6 +283,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .diary-text blockquote { margin-inline: auto; }
   .letter-close { top: 6px; right: 6px; }
   .letter-sheet { text-align: left; }
+  /* Строка состояния на телефоне — столбцом: отрезки друг под другом. */
+  .status { flex-direction: column; align-items: stretch; }
+  .status li { justify-content: center; padding: 6px 18px; }
+  .status li + li { box-shadow: inset 0 1px 0 rgba(201, 164, 92, 0.18); }
 }
 @media (max-width: 900px) {
   .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -267,6 +296,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .status .online .led { animation: none; }
   .tome, .tome:hover { transition: none; transform: none; }
   .card .shot img { transition: none; }
 }
