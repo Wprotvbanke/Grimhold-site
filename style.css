@@ -29,7 +29,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* Переходы к разделам — ниже липкой шапки (58px), а не под ней. */
+html { scroll-behavior: smooth; scroll-padding-top: 58px; }
 body {
   margin: 0;
   background: var(--bg);
@@ -216,6 +217,33 @@ dialog.letter::backdrop { background: rgba(4, 3, 2, 0.82); }
 .pill.live { color: var(--live); border-color: color-mix(in srgb, var(--live) 45%, transparent); }
 .pill.new { color: var(--new); border-color: color-mix(in srgb, var(--new) 50%, transparent); }
 
+/*
+ * Свёртка «Что уже в игре» (владелец, 08.10): видно первый ряд и половину
+ * второго, остальное — по стрелке. Высоту свёрнутого считает site.js по
+ * самим карточкам (рядов на ширину — сколько влезет), низ гаснет в фон.
+ */
+.fold { position: relative; }
+.fold-body { position: relative; overflow: hidden; transition: max-height 0.7s ease; }
+.fold-fade {
+  position: absolute; inset: auto 0 0 0; height: 160px; pointer-events: none;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--bg) 70%, transparent) 55%, var(--bg));
+  transition: opacity 0.4s ease;
+}
+.fold[data-open='true'] .fold-fade, .fold.flat .fold-fade { opacity: 0; }
+.fold-toggle {
+  display: flex; align-items: center; gap: 10px; margin: 6px auto 0; padding: 11px 22px 11px 24px; cursor: pointer;
+  border: 1px solid var(--line-hi); border-radius: 999px; background: var(--panel);
+  color: var(--gold-hi); font: 700 18px/1 var(--display); letter-spacing: 0.08em;
+  transition: border-color 0.2s, background 0.2s;
+}
+.fold-toggle:hover { border-color: var(--gold); background: #211b14; }
+.fold-toggle[hidden] { display: none; }
+.fold-toggle .chev { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.35s ease; }
+.fold-toggle[aria-expanded='true'] .chev { transform: rotate(180deg); }
+.fold-toggle[aria-expanded='true'] .when-closed, .fold-toggle[aria-expanded='false'] .when-open { display: none; }
+.fold-toggle[aria-expanded='false'] { animation: nudge 2.8s ease-in-out 1.2s 2; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+
 /* ---------- лента кадров ---------- */
 .strip { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
 .strip button { padding: 0; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; cursor: zoom-in; background: #000; aspect-ratio: 16 / 9; }
@@ -299,4 +327,6 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .status .online .led { animation: none; }
   .tome, .tome:hover { transition: none; transform: none; }
   .card .shot img { transition: none; }
+  .fold-body, .fold-fade, .fold-toggle .chev { transition: none; }
+  .fold-toggle[aria-expanded='false'] { animation: none; }
 }

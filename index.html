@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230e0c0a%22/><text x=%2250%22 y=%2272%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%23c9a45c%22 font-family=%22Georgia%22>G</text></svg>" />
 <link rel="preload" href="fonts/CormorantSC-bold-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="fonts/EBGaramond-cyrillic.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="stylesheet" href="style.css?v=1005a" />
+<link rel="stylesheet" href="style.css?v=1008a" />
 <script>
   // Язык — до первой отрисовки: выбранный раньше или английский для нерусского браузера.
   (function () {
@@ -56,7 +56,7 @@
     <ul class="status" aria-label="Состояние игры / Game status">
       <li class="online"><span class="led" aria-hidden="true"></span><span lang="ru">Сервер в сети</span><span lang="en">Server online</span></li>
       <li class="stage"><span class="led" aria-hidden="true"></span><span lang="ru">Открытый тест</span><span lang="en">Open test</span></li>
-      <li class="when"><span lang="ru">Обновлено 6 октября 2026</span><span lang="en">Updated October 6, 2026</span></li>
+      <li class="when"><span lang="ru">Обновлено 7 октября 2026</span><span lang="en">Updated October 7, 2026</span></li>
     </ul>
     <div class="actions">
       <a class="btn" href="https://grimhold-online.lumihub.dev" target="_blank" rel="noopener"><span lang="ru">Играть в браузере</span><span lang="en">Play in the browser</span></a>
@@ -107,9 +107,63 @@
   <div class="wrap">
     <div class="head">
       <h2><span lang="ru">Что уже в игре</span><span lang="en">What is in the game</span></h2>
-      <p><span lang="ru">Всё ниже работает на живом сервере.</span><span lang="en">Everything below runs on the live server.</span></p>
+      <p><span lang="ru">Всё ниже работает на живом сервере. Свежее — сверху.</span><span lang="en">Everything below runs on the live server. Newest first.</span></p>
     </div>
+    <div class="fold" id="nowFold" data-open="false">
+    <div class="fold-body" id="nowBody">
     <div class="grid">
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/shop.webp"><img src="shots/shop.webp" alt="Торговец за прилавком на площади, над ним вывеска «Городская лавка!»" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Лавка на площади</span><span lang="en">The town shop</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Прилавок торговца на северо-западе площади: товар лежит на столе, над продавцом — вывеска «Городская лавка!». E — и его вещи открываются рядом с твоим рюкзаком, нужное перетаскиваешь себе. Пока всё даром — бери и пробуй.</span><span lang="en">A trader's stall in the north-west of the square: the goods lie on the table, a "Town shop!" sign hangs over the trader. Press E and his wares open next to your backpack — drag what you need into your pack. Everything is free for now: take it and try it.</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/swim.webp"><img src="shots/swim.webp" alt="Вид из моря на пляж и лес" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Плавание</span><span lang="en">Swimming</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Глубже пояса — вплавь: глаза над водой, медленно, без боя. Доплыть можно до края мира, но силы тают — кончились, и ты тонешь. Звери за тобой в воду не пойдут.</span><span lang="en">Deeper than your waist you swim: eyes above the water, slowly, no fighting. You can swim to the edge of the world, but stamina drains — run out and you drown. Beasts won't follow you into the sea.</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/mace.webp"><img src="shots/mace.webp" alt="Шипастая булава в правой руке и деревянный щит в левой" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Булава, щит и удар</span><span lang="en">Mace, shield and the strike</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Железная булава в лавке. У меча свои звуки — свист клинка, удар, ножны. Щит держат на ремнях, он шире и снимается за спину. F отменяет удар, пока он не дошёл, а попадание видно по кресту у прицела.</span><span lang="en">An iron mace at the shop. The sword has its own sounds — the whistle of the blade, the hit, the scabbard. The shield sits on its straps, wider than before, and goes on your back. F cancels a strike before it lands, and a cross at the crosshair shows you hit.</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/torch.webp"><img src="shots/torch.webp" alt="Ночь на площади: факел в левой руке, меч в правой" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Факел в руке</span><span lang="en">A torch in hand</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Надел факел — он виден в левой руке: тот же, что у городского стражника, с живым огнём. Светит, пока в руке, но щит туда уже не возьмёшь, а тебя видно издалека.</span><span lang="en">Equip a torch and you see it in your left hand — the same one the town guard carries, with a living flame. It burns while you hold it, but there is no room left for a shield, and you can be seen from afar.</span></p>
+        </div>
+      </article>
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/note.webp"><img src="shots/note.webp" alt="Записка о железном мече на клочке пергамента" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Записки о вещах</span><span lang="en">Notes on items</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
+          <p><span lang="ru">Наведи на вещь — клочок пергамента с наброском карандашом: что это, откуда взялось и к чему пригодится.</span><span lang="en">Hover over an item to see a scrap of parchment with a pencil sketch: what it is, where it came from and what it is good for.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/shield.webp"><img src="shots/shield.webp" alt="Поднятый деревянный щит и меч в руке" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Щит и блок</span><span lang="en">Shield and block</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Деревянный щит в левой руке. Правая кнопка мыши поднимает его к подбородку — тяжело, с усилием, — и он держит удары и стрелы спереди. Блок есть только со щитом. Другие видят щит в руке, в блоке и на спине.</span><span lang="en">A wooden shield in the left hand. The right mouse button lifts it to your chin — heavily, with effort — and it stops blows and arrows from the front. Only a shield can block. Others see it in your hand, raised and on your back.</span></p>
+        </div>
+      </article>
+
+      <article class="card">
+        <button class="shot" type="button" data-view="shots/bow.webp"><img src="shots/bow.webp" alt="Натянутый лук с новой стрелой" loading="lazy" width="1280" height="720" /></button>
+        <div class="body">
+          <h3><span lang="ru">Лук</span><span lang="en">The bow</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
+          <p><span lang="ru">Зажал — натянул, отпустил — стрела уходит сразу; стрела новая — и на тетиве, и в полёте. Прицел свободен, тетива в пальцах лучника. Сила выстрела — от натяжения.</span><span lang="en">Hold to draw, release and the arrow flies at once — a new arrow, on the string and in flight. The crosshair stays clear, the string sits in an archer's fingers. The shot's power follows the draw.</span></p>
+        </div>
+      </article>
 
       <article class="card">
         <button class="shot" type="button" data-view="shots/town.webp"><img src="shots/town.webp" alt="Улица города ночью, собор с горящими окнами" loading="lazy" width="1280" height="720" /></button>
@@ -131,7 +185,7 @@
         <button class="shot" type="button" data-view="shots/sunset.webp"><img src="shots/sunset.webp" alt="Закат над лесом, шпили собора вдали" loading="lazy" width="1280" height="720" /></button>
         <div class="body">
           <h3><span lang="ru">Лес, небо, погода</span><span lang="en">Forest, sky, weather</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
-          <p><span lang="ru">Густой лес — подрост и великаны вперемешку. Объёмные облака, девять погод от ясного дня до грозы, день сменяет ночь.</span><span lang="en">A dense forest of saplings and giants. Volumetric clouds, nine kinds of weather from clear skies to storms, day turning to night.</span></p>
+          <p><span lang="ru">Густой лес на холмах — подрост и великаны вперемешку, низкая лесная трава, бабочки днём, светлячки ночью, падают листья. Объёмные облака, девять погод, день сменяет ночь.</span><span lang="en">A dense forest on rolling hills — saplings and giants, low woodland grass, butterflies by day, fireflies at night, falling leaves. Volumetric clouds, nine kinds of weather, day turning to night.</span></p>
         </div>
       </article>
 
@@ -140,30 +194,6 @@
         <div class="body">
           <h3><span lang="ru">Море на севере</span><span lang="en">The northern sea</span> <span class="pill live"><span lang="ru">в игре</span><span lang="en">live</span></span></h3>
           <p><span lang="ru">Пляж с дюнами, волны до горизонта, прибой и чайки. По воде слышно каждый шаг; глубже пояса не зайти.</span><span lang="en">A beach with dunes, waves to the horizon, surf and gulls. Every step splashes; you can wade no deeper than your waist.</span></p>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="shot" type="button" data-view="shots/shield.webp"><img src="shots/shield.webp" alt="Поднятый деревянный щит и меч в руке" loading="lazy" width="1280" height="720" /></button>
-        <div class="body">
-          <h3><span lang="ru">Щит и блок</span><span lang="en">Shield and block</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
-          <p><span lang="ru">Деревянный щит в левой руке. Правая кнопка мыши поднимает его к подбородку — тяжело, с усилием, — и он держит удары и стрелы спереди. Блок есть только со щитом. Другие видят щит в руке, в блоке и на спине.</span><span lang="en">A wooden shield in the left hand. The right mouse button lifts it to your chin — heavily, with effort — and it stops blows and arrows from the front. Only a shield can block. Others see it in your hand, raised and on your back.</span></p>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="shot" type="button" data-view="shots/bow.webp"><img src="shots/bow.webp" alt="Натянутый лук, стрела у щеки" loading="lazy" width="1280" height="720" /></button>
-        <div class="body">
-          <h3><span lang="ru">Лук</span><span lang="en">The bow</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
-          <p><span lang="ru">Зажал — натянул, отпустил — стрела уходит сразу. Прицел свободен, тетива в пальцах лучника, на натяге взгляд чуть сужается. Сила выстрела — от натяжения.</span><span lang="en">Hold to draw, release and the arrow flies at once. The crosshair stays clear, the string sits in an archer's fingers, the view narrows slightly as you draw. The shot's power follows the draw.</span></p>
-        </div>
-      </article>
-
-      <article class="card">
-        <button class="shot" type="button" data-view="shots/sword.webp"><img src="shots/sword.webp" alt="Замах железным мечом" loading="lazy" width="1280" height="720" /></button>
-        <div class="body">
-          <h3><span lang="ru">Меч: серия ударов</span><span lang="en">Sword combos</span> <span class="pill new"><span lang="ru">новое</span><span lang="en">new</span></span></h3>
-          <p><span lang="ru">Косой, обратный и укол — каждый следующий сильнее. Удар чувствуется: заминка при попадании, толчок, след клинка, свист. Железный меч пока выдаёт ведущий на пробу — игрокам он придёт позже.</span><span lang="en">A slash, a backhand and a thrust — each harder than the last. Hits land with weight: a hitch on impact, a jolt, a blade trail, a whistle. For now the iron sword is handed out by the game master for testing; players get it later.</span></p>
         </div>
       </article>
 
@@ -241,6 +271,14 @@
       <button type="button" data-view="shots/login.webp"><img src="shots/login.webp" alt="Экран входа" loading="lazy" /></button>
       <button type="button" data-view="shots/death.webp"><img src="shots/death.webp" alt="Экран смерти" loading="lazy" /></button>
     </div>
+    </div>
+    <div class="fold-fade" aria-hidden="true"></div>
+    </div>
+    <button class="fold-toggle" type="button" id="nowToggle" aria-expanded="false" aria-controls="nowBody">
+      <span class="when-closed"><span lang="ru">Все новинки</span><span lang="en">Everything new</span></span>
+      <span class="when-open"><span lang="ru">Свернуть</span><span lang="en">Collapse</span></span>
+      <svg class="chev" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" /></svg>
+    </button>
   </div>
 </section>
 
@@ -250,6 +288,43 @@
       <h2><span lang="ru">Последние обновления</span><span lang="en">Recent updates</span></h2>
     </div>
     <div class="log">
+      <article>
+        <time datetime="2026-10-07"><span lang="ru">7 октября</span><span lang="en">October 7</span></time>
+        <ul lang="ru">
+          <li>Лавка торговца на площади, как в классических MMO: товар на столе, вывеска «Городская лавка!», вещи перетаскиваются в рюкзак</li>
+          <li>Плавание: глубже пояса — вплавь, до края мира, пока хватает сил; звери в воду не идут</li>
+          <li>За стенами холмы, бабочки, светлячки и падающие листья, новая низкая лесная трава</li>
+          <li>Новые руки от первого лица — подробнее, кожа с порами и рельефом</li>
+          <li>Железная булава и железный меч в лавке. Меч бьёт широким взмахом через весь кадр, у него свои звуки — свист клинка, удар, ножны. Серия ударов с меча снята — переделываем</li>
+          <li>F — отменить удар, пока он не дошёл: лук опускается без выстрела, силы возвращаются</li>
+          <li>Попал — у прицела вспыхивает крест</li>
+          <li>Факел в левой руке теперь виден — тот же, что у городского стражника</li>
+          <li>Щит на ремнях, шире от первого лица; вторым нажатием ячейки — за спину</li>
+          <li>Новая стрела — на тетиве и в полёте</li>
+          <li>Питьё: оружие уходит вниз, фляга в руке, зелье убывает глотками</li>
+          <li>Прыжок стоит сил; море чуть выше, прибой набегает на песок</li>
+          <li>Наведи на вещь — записка на пергаменте: что это, откуда и к чему</li>
+          <li>Без WebGPU игра объясняет, как включить его в твоём браузере</li>
+          <li>Исправлено: невидимая стена в лесу у восточных ворот и у моря, после которой бросало то к стене города, то обратно (по отзывам игроков); мерцание в пороге собора; стрела, на миг улетавшая поперёк экрана посреди натяжки</li>
+        </ul>
+        <ul lang="en">
+          <li>A trader's stall on the square, like in classic MMOs: goods on the table, a "Town shop!" sign, drag items into your backpack</li>
+          <li>Swimming: deeper than your waist you swim, out to the edge of the world while your stamina lasts; beasts stay out of the water</li>
+          <li>Rolling hills beyond the walls, butterflies, fireflies and falling leaves, new low woodland grass</li>
+          <li>New first-person hands — more detailed, skin with pores and relief</li>
+          <li>An iron mace and an iron sword at the shop. The sword swings wide across the whole view and has its own sounds — the whistle of the blade, the hit, the scabbard. Sword combos are removed while we rework them</li>
+          <li>F cancels a strike before it lands: the bow lowers without shooting and your stamina comes back</li>
+          <li>Land a hit and a cross flashes at your crosshair</li>
+          <li>Your torch now shows in your left hand — the same one the town guard carries</li>
+          <li>The shield sits on its straps and looks wider in first person; press its slot again to put it on your back</li>
+          <li>A new arrow — on the string and in flight</li>
+          <li>Drinking: your weapon goes down, the flask comes up, the potion drains sip by sip</li>
+          <li>Jumping costs stamina; the sea is a little higher and the surf runs up the sand</li>
+          <li>Hover over an item for a note on parchment: what it is, where it comes from, what it's for</li>
+          <li>Without WebGPU the game explains how to turn it on in your browser</li>
+          <li>Fixed: an invisible wall in the woods by the east gate and at the sea, after which you were thrown to the town wall and back (from players' reports); flickering in the cathedral doorway; the arrow flicking across the screen mid-draw</li>
+        </ul>
+      </article>
       <article>
         <time datetime="2026-10-06"><span lang="ru">6 октября</span><span lang="en">October 6</span></time>
         <ul lang="ru">
@@ -429,7 +504,7 @@
 </dialog>
 
 <script src="feedback.js?v=1005a"></script>
-<script src="site.js?v=1005a"></script>
+<script src="site.js?v=1008a"></script>
 <script type="module" src="diary.js?v=1005a"></script>
 </body>
 </html>

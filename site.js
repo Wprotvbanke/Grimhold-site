@@ -17,6 +17,46 @@
     button.addEventListener('click', function () { setLang(button.dataset.setLang); });
   });
 
+  // ---------- «Что уже в игре»: свёрнуто — первый ряд и полряда второго ----------
+  var fold = document.getElementById('nowFold');
+  var foldBody = document.getElementById('nowBody');
+  var foldToggle = document.getElementById('nowToggle');
+  if (fold && foldBody && foldToggle) {
+    var cards = foldBody.querySelectorAll('.card');
+    // Свёрнутая высота — по карточкам: верх второго ряда и половина его карточки.
+    var collapsed = function () {
+      if (cards.length < 2) return foldBody.scrollHeight;
+      var top = cards[0].offsetTop;
+      for (var i = 1; i < cards.length; i++) {
+        if (cards[i].offsetTop > top + 2) return cards[i].offsetTop + cards[i].offsetHeight / 2;
+      }
+      return foldBody.scrollHeight;
+    };
+    var paintFold = function () {
+      var open = fold.dataset.open === 'true';
+      var low = collapsed();
+      var full = foldBody.scrollHeight;
+      var needed = full > low + 40;
+      foldToggle.hidden = !needed;
+      fold.classList.toggle('flat', !needed);
+      foldBody.style.maxHeight = (open || !needed ? full : low) + 'px';
+    };
+    foldToggle.addEventListener('click', function () {
+      var open = fold.dataset.open !== 'true';
+      fold.dataset.open = String(open);
+      foldToggle.setAttribute('aria-expanded', String(open));
+      paintFold();
+      // Свернул далеко внизу — вернуть к началу раздела, а не оставить в пустоте.
+      if (!open && fold.getBoundingClientRect().top < 0) {
+        document.getElementById('now').scrollIntoView({ block: 'start' });
+      }
+    });
+    window.addEventListener('resize', paintFold);
+    // Высоту карточек меняют шрифты — пересчитать, когда приедут.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(paintFold);
+    paintFold();
+  }
+
   // ---------- кадры крупно ----------
   var view = document.getElementById('view');
   var viewImage = document.getElementById('viewImage');
